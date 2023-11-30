@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import turf from "@turf/turf";
 
 import generateRandomPoint from "../utils/randomPoint";
 
