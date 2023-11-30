@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import turf from "@turf/turf";
 
+import generateRandomPoint from "../utils/randomPoint";
+
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) => {
@@ -15,9 +17,15 @@ router.get("/", (req: Request, res: Response) => {
     });
   }
 
-  const currentPoint = turf.point([req.query.lat, +lng]);
+  const goalPoint = generateRandomPoint(Number(lat), Number(lng), 1000);
 
-  console.log(lat, lng);
+  console.log(lat, lng, goalPoint);
+  res.status(200).json({
+    status: "success",
+    data: {
+      point: goalPoint,
+    },
+  });
 });
 
 export default router;
