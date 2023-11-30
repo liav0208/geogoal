@@ -11,18 +11,19 @@ const Goal = ({lat, lng}) => {
     const getLocation = async () => {
       try {
         
-      const goalGeneratedLocation = await axios.get(`http://localhost:3001/api/v1/goal?lat=${0}&lng=${0}`);
+      const {data} = await axios.get(`http://localhost:3001/api/v1/goal?lat=${lat}&lng=${lng}`);
+        setGoalLocation({lat: +data.data.point.latitude, lng: +data.data.longitude});
+        console.log({lat: +data.data.point.latitude, lng: +data.data.point.longitude}, lat, lng);
 
-      console.log(goalGeneratedLocation);
       } catch(err) {
         console.log(err);
       }
     };
 
     getLocation();
-  }, [])
+  }, [lat, lng])
   
-  return (<Marker position={goalLocation} icon={{url: GoalImage, scaledSize: new window.google.maps.Size(100, 100)}} /> );
+  return (<Marker position={goalLocation} icon={{url: GoalImage, scaledSize: new window.google.maps.Size(200, 200)}} /> );
 }
  
 export default Goal;

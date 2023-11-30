@@ -14,7 +14,7 @@ const containerStyle = {
 
 const Map = () => {
   const [map, setMap] = useState(null);
-  const [location, setLocation] = useState({lat: 0, lng: 0});
+  const [location, setLocation] = useState(false);
   
   const {isLoaded} = useJsApiLoader({
     id: 'google-map-script',
@@ -22,12 +22,13 @@ const Map = () => {
   })
 
 
-  const onLoad = useCallback(map => {
-    const bounds = new window.google.maps.LatLngBounds(location);
-    map.fitBounds(bounds);
+const onLoad = useCallback((map) => {
+  const bounds = new window.google.maps.LatLngBounds();
+  bounds.extend(location);
+  map.fitBounds(bounds);
 
-    setMap(map);
-  }, [])
+  setMap(map);
+}, [location]);
 
   const onUnmount = useCallback(map => {
     setMap(null)
@@ -42,7 +43,7 @@ const Map = () => {
   }, [])
 
   
-  return isLoaded ? (
+  return (isLoaded && location) ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={location}

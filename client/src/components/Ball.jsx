@@ -15,7 +15,7 @@ const Ball = () => {
       })
     }
   }, [])
-  return (<Marker position={location} icon={{url: BallImage, scaledSize: new window.google.maps.Size(100, 100)}} /> );
+  return (<Marker position={location} icon={{url: BallImage, scaledSize: new window.google.maps.Size(80, 80)}} /> );
 }
  
 export default Ball;
