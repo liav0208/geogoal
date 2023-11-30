@@ -17,9 +17,8 @@ router.get("/", (req: Request, res: Response) => {
     });
   }
 
-  const goalPoint = generateRandomPoint(Number(lat), Number(lng), 1000);
+  const goalPoint = generateRandomPoint(Number(lat), Number(lng), 1);
 
-  console.log(lat, lng, goalPoint);
   res.status(200).json({
     status: "success",
     data: {
